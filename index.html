@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সকল সভ্য জাতির জন্য বার্তা</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    body{background:#000;font-family:sans-serif;min-height:100vh}
+    .main-box{position:relative;text-align:center;padding:80px 0}
+    .kham{width:320px;height:220px;position:relative;margin:0 auto;cursor:pointer;-webkit-user-select:none;user-select:none}
+    .kham-body{width:100%;height:100%;background:#1a1a1a;border:4px solid #00ff88;border-radius:12px;position:absolute;box-shadow:0 0 25px #00ff88;z-index:1;overflow:hidden}
+    .kham-niche{position:absolute;bottom:5px;left:0;width:100%;font-size:7px;color:#00ff88;font-weight:700;text-align:center;z-index:5;opacity:0.8;line-height:1.2;padding:0 5px}
+    .kham-flap{width:100%;height:110px;background:#1a1a1a;border:4px solid #00ff88;border-bottom:none;border-radius:12px 12px 0 0;position:absolute;top:0;transform-origin:top;transition:transform 0.8s ease;clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%);box-shadow:0 0 25px #00ff88,0 15px 30px -10px #00ff88,inset 0 -5px 20px rgba(0,255,136,0.5);z-index:2}
+    .kham.khula .kham-flap{transform:rotateX(180deg)}
+    .open-hint{position:absolute;top:5px;left:50%;transform:translateX(-50%);color:#00ff88;font-size:10px;font-weight:700;z-index:5;text-shadow:0 0 10px #00ff88;animation:blink 1.5s infinite}
+    .open-hint::after{content:'↑';display:block;font-size:16px;margin-top:-3px;animation:arrowMove 1.5s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
+    @keyframes arrowMove{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .bismillah{position:absolute;top:3px;left:0;width:100%;font-size:11px;color:#00ff88;font-weight:700;text-align:center;z-index:3}
+    .muhammad{position:absolute;top:18px;left:10px;font-size:10px;color:#00ff88;font-weight:700;line-height:1.4;text-align:left;z-index:3}
+    .allah-name{position:absolute;top:18px;right:10px;font-size:7px;color:#00ff88;font-weight:700;line-height:1.4;text-align:right;z-index:3}
+    .heading{position:absolute;top:38px;left:0;width:100%;font-size:9px;color:#00ff88;font-weight:700;text-align:center;z-index:3;line-height:1.3;padding:0 8px}
+    .chand{position:absolute;top:70%;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;background:#fff;border-radius:50%;box-shadow:0 0 12px #fff,0 0 20px #00ff88;z-index:4;display:flex;align-items:center;justify-content:center}
+    .chand-txt{position:absolute;font-size:3px;color:#000;font-weight:700;opacity:0.5}
+    .touch{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:9px;color:#00ff88;font-weight:700;text-align:center;z-index:6;text-shadow:0 0 10px #000;line-height:1.2;margin-top:25px}
+    .content{background:#000;color:#00ff88;padding:40px 12px;display:none;min-height:100vh}
+    .content.show{display:block}
+    h1{font-size:20px;text-shadow:0 0 15px #00ff88;margin:10px 0;text-align:center}
+    h2{font-size:16px;text-shadow:0 0 15px #00ff88;margin:35px 0 10px 0;border-bottom:2px solid #00ff88;padding-bottom:5px;display:inline-block}
+    .bn{font-size:13px;line-height:1.8;margin:3px 0;font-weight:600;text-align:center;color:#00ff88}
+    .en{font-size:11px;color:#88ffaa;line-height:1.6;margin:0 0 10px 0;font-weight:500;text-align:center}
+    .tension-box{margin:25px 0;padding:18px;border:1px solid #00ff88;border-radius:10px;text-align:center}
+    .dash-box{margin:30px 12px;padding:20px;border:1px dashed #00ff88;border-radius:8px;text-align:center}
+    .footer-title{font-size:18px;font-weight:bold;color:#00ff88;margin:30px 0 8px 0;text-align:center;text-shadow:0 0 20px #00ff88}
+    .warning-head{font-size:18px;font-weight:700;color:#ff0;margin-top:25px;margin-bottom:10px;text-align:center;text-shadow:0 0 15px #ff0}
+    
+    /* শেয়ার লিস্ট */
+    .share-list-box{
+      margin:25px 12px 0 12px;
+      padding:15px;
+      border:1px dotted #00ff88;
+      border-radius:8px;
+      text-align:center;
+    }
+    .share-list-title{
+      color:#00ff88;
+      font-size:14px;
+      margin-bottom:10px;
+      font-weight:700;
+      text-shadow:0 0 10px #00ff88;
+    }
+    .share-list{
+      max-height:150px;
+      overflow-y:auto;
+      text-align:left;
+    }
+    .share-list::-webkit-scrollbar{width:4px}
+    .share-list::-webkit-scrollbar-thumb{background:#00ff88;border-radius:2px}
+    .share-item{
+      color:#00ff88;
+      font-size:12px;
+      padding:4px 0;
+      border-bottom:1px dotted rgba(0,255,136,0.2);
+    }
+    .share-count{
+      color:#00ff88;
+      font-size:12px;
+      margin-top:10px;
+      opacity:0.9;
+    }
+    
+    /* নিচের ৩টা বাটন */
+    .bottom-actions{
+      display:flex;
+      gap:12px;
+      padding:30px 20px;
+      background:#000;
+    }
+    .action-btn{
+      flex:1;
+      background:#000;
+      border:3px solid #00ff88;
+      color:#00ff88;
+      padding:14px 8px;
+      border-radius:35px;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      font-family:inherit;
+      box-shadow:0 0 25px rgba(0,255,136,0.8);
+      text-align:center;
+      transition:all 0.2s;
+    }
+    .action-btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 35px rgba(0,255,136,1);
+    }
+    .action-btn.solid{
+      background:#00ff88;
+      color:#000;
+    }
+    .action-btn.solid:hover{
+      background:#00cc6a;
+    }
+  </style>
+</head>
+<body>
+  <div id="mainBox" class="main-box">
+    <div class="kham" id="envelope">
+      <div class="kham-body">
+        <div class="touch">✉️ স্পর্শ করুন হৃদয় থেকে<br>Touch from the Heart</div>
+        <div class="kham-niche"> সৌজন্যে-:(:: শেয়ার কারি:::::::::):-<br>Courtesy-:(::MD Alamgir Hossain::Jane::):-</div>
+      </div>
+      <div class="kham-flap">
+        <div class="open-hint">اَللّٰهُ</div>
+        <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <div class="muhammad">مُحَمَّدٌ (ﷺ)</div>
+        <div class="allah-name">(يَا اللّٰهُ)<br>(يَا رَحْمٰنُ)<br>(يَا ذَا الْجَلَالِ وَالْإِكْرَامِ)</div>
+        <div class="heading">-:(::সকল সভ্য জাতির জন্য বার্তা::):-<br>-:(::Message for All Civilized Nations::):-</div>
+        <div class="chand"><span class="chand-txt">يا الله</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content" id="vitore">
+    <h1>[হ্যাঁ অবশ্যই তোমার বিধান]</h1>
+    <p class="en">[Yes, your law must be ideal]</p>
+    <h1>[হওয়া উচিত আদর্শবান]</h1>
+    <p class="en">[It should be exemplary]</p>
+    
+    <div class="tension-box">
+      <p class="bn" style="font-size:24px;color:#fff">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <p class="bn">পরম করুণাময় অসীম দয়ালু আল্লাহর নামে শুরু করিতেছি</p>
+      <p class="en">In the name of Allah, the Most Gracious, the Most Merciful</p>
+      <p class="bn" style="font-size:16px;color:#00ff88;margin-top:15px;font-weight:700">-:(::::::::: চলো একবার পড়ি :::::::::):-</p>
+      <p class="en">-:(::::::::: Let's read it once :::::::::):-</p>
+      <p class="bn" style="font-size:16px;color:#00ff88;font-weight:700">-:(::: ভালো মনে হলে নতুন করে শুরু করি :::):-</p>
+      <p class="en">-:(::: If it feels good, let's start anew :::):-</p>
+      <p class="bn" style="font-size:20px;color:#fff;margin-top:15px">لَا إِلَٰهَ إِلَّا ٱللَّٰهُ مُحَمَّدٌ رَسُولُ ٱللَّٰهِ ﷺ</p>
+      <p class="bn">আল্লাহ ছাড়া সত্য কোনো উপাস্য নেই এবং মুহাম্মদ ﷺ আল্লাহর রাসূল</p>
+      <p class="en">There is no deity except Allah, and Muhammad ﷺ is the Messenger of Allah</p>
+      <p class="bn" style="margin-top:15px">আমি সাক্ষ্য দিতেছি যে এবাদতের উপযুক্ত এক আল্লাহ তায়ালা ব্যতীত আর কোন মাবুদ বা ইলা নেই হযরত মুহাম্মদ সাঃ আল্লাহর প্রিয় রাসূল ও বান্দা</p>
+      <p class="en">I bear witness that there is no deity worthy of worship except Allah, and Muhammad ﷺ is Allah's beloved Messenger and servant</p>
+      <p class="bn" style="font-size:18px;margin-top:10px">-:(:::::::::::::::::::::আমিন:::::::::::::::):-</p>
+      <p class="en">-:(::::::::::::::::::MD:Alamgir Hossain::::::::::::::):-</p>
+      <p class="bn" style="font-size:20px;margin-top:15px">হ্যাঁ অবশ্যই তোমার বিধান হওয়া উচিত আদর্শবান</p>
+      <p class="en">Yes, your law must indeed be ideal and exemplary</p>
+    </div>
+
+    <div class="tension-box">
+      <h2>কবিতা নাম: অস্থির {জেনি আলম}✓</h2>
+      <p class="en">Poem Name: Restless {Jeni Alam}✓</p>
+      <p class="bn">কেন নিরাপত্তার নামে ফিলিস্তিন আর লেবাননে সহিংসতা হয়</p>
+      <p class="en">Why does violence happen in Palestine and Lebanon in the name of security?</p>
+      <p class="bn">এরাই কি সভ্য জাতি?</p>
+      <p class="en">Are these the civilized nations?</p>
+      <p class="bn">কেমন করে নিভিয়ে দিল ,ইরানের হাজারো শিশুর, জীবনের বাতি</p>
+      <p class="en">How did they extinguish the lamps of thousands of children's lives in Iran?</p>
+      <p class="bn">এটা কেমন করে হয়</p>
+      <p class="en">How can this happen?</p>
+      <p class="bn">আমি তিক্ত ✓ আমি ক্ষিপ্ত ✓ এটা অতিরিক্ত✓</p>
+      <p class="en">I am bitter ✓ I am furious ✓ This is excessive✓</p>
+      <p class="bn">বল মানবজাতি বল✓ এদের চোখে নাই কি জল ✓</p>
+      <p class="en">Speak, O humanity ✓ Don't they have tears in their eyes? ✓</p>
+      <p class="bn">মনে হচ্ছে জীবন হল বিফল✓ লাগে লজ্জা ✓</p>
+      <p class="en">It feels like life is a failure ✓ I feel ashamed ✓</p>
+      <p class="bn">এত সাজ সজ্জা ✓ সেটাও নকল✓</p>
+      <p class="en">So much decoration ✓ Even that is fake✓</p>
+      <p class="bn">আমি জঘন্য ,এখনো ফিলিস্তিনে মানুষের জীবন বিপন্ন</p>
+      <p class="en">I am horrified that human lives in Palestine are still in danger</p>
+      <p class="bn">নিজেকে ধিক্কার কেন আসে না চিৎকার</p>
+      <p class="en">I condemn myself, why doesn't a scream come out?</p>
+      <p class="bn">ধরলে হাতে হাত মিটে যায় সকল বিবাদ( ঐ✓</p>
+      <p class="en">If we hold hands, all disputes end ✓</p>
+      <p class="bn">আমার এই হৃদয়ের বাণী, পৌঁছাবে না জানি</p>
+      <p class="en">I know this message from my heart will not reach</p>
+      <p class="bn">তবু তোমরা জেনে রাখো, আমি মুসলিম সাক্ষী থাকো</p>
+      <p class="en">Yet you should know I am a Muslim, bear witness</p>
+      <p class="bn" style="font-size:16px;margin-top:15px">Ameen, آمين, আমিন</p>
+      <p class="en">Author, Alamgir Hossain</p>
+    </div>
+
+    <div class="dash-box">
+      <p class="bn">-:(:::: WhatsApp.01744414891:::::):-</p>
+      <p class="bn" style="font-size:15px;margin:10px 0">মনে রেখো অবশ্যই তোমার ব্যক্তিত্ব ✓</p>
+      <p class="en">Remember, your personality indeed ✓</p>
+      <p class="bn" style="font-size:15px">কর্মের দ্বারা প্রকাশিত হবে ✓</p>
+      <p class="en">Will be revealed through your actions ✓</p>
+      <p class="bn">-:(:::::::::::::::Abu::::::Alam:::::::::::::::::):-</p>
+    </div>
+
+    <div class="tension-box">
+      <h2>-:(:: সঠিক পথ:::::::::জেনি আলম::):-</h2>
+      <p class="en">-:(:: The Right Path:::::::::Jeni Alam::):-</p>
+      <p class="bn">সত্য বলো ✓</p>
+      <p class="en">Speak the truth ✓</p>
+      <p class="bn">সত্যের পথে চলো ✓</p>
+      <p class="en">Walk on the path of truth ✓</p>
+      <p class="bn">ন্যায্য পোষাউ ✓</p>
+      <p class="en">Uphold justice ✓</p>
+      <p class="bn">আলোর পথে যাও✓</p>
+      <p class="en">Go towards the light✓</p>
+      <p class="bn">ভালোর পথে যাও ✓</p>
+      <p class="en">Go on the path of goodness ✓</p>
+      <p class="bn">অন্যায়ের বিরুদ্ধে রুখে দাঁড়াও ✓</p>
+      <p class="en">Stand against injustice ✓</p>
+      <p class="bn">এটাই মেনে নাও ✓</p>
+      <p class="en">Accept this ✓</p>
+      <p class="bn">প্রয়োজনে জিহাদ করে জীবন দাও ✓</p>
+      <p class="en">If necessary, give your life in jihad ✓</p>
+      <p class="bn">মিথ্যাকে বলো মিথ্যা ✓</p>
+      <p class="en">Call falsehood false ✓</p>
+      <p class="bn">সত্যকে বলো সত্য ✓</p>
+      <p class="en">Call truth truth ✓</p>
+      <p class="bn">যদিও কথা তিক্ত ✓ তবুও সেটা সত্য ✓</p>
+      <p class="en">Though the word is bitter ✓ Still it is truth ✓</p>
+      <p class="bn">গড়ে তুলো ঐক্য ✓ তাহলেই হবে সভ্য ✓</p>
+      <p class="en">Build unity ✓ Then you will be civilized ✓</p>
+      <p class="bn">নয় কারো পক্ষ ✓ যেখানে আছে সত্য ✓</p>
+      <p class="en">Not for anyone's side ✓ Where there is truth ✓</p>
+      <p class="bn">সেখানেই কর ব্যক্ত ✓</p>
+      <p class="en">Express it there ✓</p>
+      <p class="bn">যদিও সত্যের কথা তিক্ত ✓</p>
+      <p class="en">Though the word of truth is bitter ✓</p>
+      <p class="bn">প্রয়োজনে দাও রক্ত ✓</p>
+      <p class="en">Give blood if necessary ✓</p>
+      <p class="bn">সত্যের জয় চিরন্তর✓</p>
+      <p class="en">Truth's victory is eternal✓</p>
+      <p class="bn">ভাবিস কি? হবে না মরন তোর✓</p>
+      <p class="en">Don't think death won't come to you✓</p>
+      <p class="bn">যদিও তিক্ত সত্য মরন ✓</p>
+      <p class="en">Though death is a bitter truth ✓</p>
+      <p class="bn">তেমনি আদর্শে গড় জীবন ✓</p>
+      <p class="en">So is an ideal life great ✓</p>
+      <p class="bn">তোমায় মনে রাখবে ভুবন ✓</p>
+      <p class="en">The world will remember you ✓</p>
+      <p class="bn">মনে হবে সবাই তোমার আপন ✓</p>
+      <p class="en">Everyone will seem like your own ✓</p>
+      <p class="bn">সত্যকে আর রেখনা  গোপন ✓</p>
+      <p class="en">Don't keep truth hidden anymore ✓</p>
+      <p class="bn">নয় কম,নয় বেশি, সঠিক বিচারে আল্লাহ খুশি✓</p>
+      <p class="en">The world will prosper with joy and peace ✓</p>
+      <p class="bn" style="margin-top:15px">-:(::::::::::::::: মোঃ আলম::::::::::::::):-</p>
+      <p class="bn">মনে রেখো অবশ্যই তোমার ব্যক্তিত্ব ✓</p>
+      <p class="en">Remember, your personality indeed ✓</p>
+      <p class="bn">কর্মের দ্বারা প্রকাশিত হবে✓</p>
+      <p class="en">Will be revealed through your actions✓</p>
+      <p class="bn">-:(:::::::::::::::Abu::::::Alam:::::::::::::::::):-</p>
+    </div>
+
+    <div class="tension-box">
+      <p class="bn footer-title">কৃতিত্ব ও সাক্ষ্য:</p>
+      <p class="en">Credit & Testimony:</p>
+      <p class="bn">এই বার্তা মহান স্রষ্টা রাব্বুল আলামীনের পক্ষ থেকে এসেছে</p>
+      <p class="en">This message has come from the Great Creator, Rabbul Alamin</p>
+      <p class="bn" style="margin-top:15px">মাধ্যম: মোঃ আমীদ আশফাক  {জেনি}</p>
+      <p class="en">Medium: Md Alamgir Hossain {Jeni Alam}</p>
+      <p class="bn">সহযোগিতা: Meta AI ও ৬৭,০০০+ ডিজাইনার ও ইঞ্জিনিয়ার</p>
+      <p class="en">Assistance: Meta AI & 67,000+ Designers and Engineers</p>
+    </div>
+
+    <div class="tension-box">
+      <p class="bn warning-head">সতর্কতা:</p>
+      <p class="en">Warning:</p>
+      <p class="bn">এই বার্তা শান্তি, মানবতা ও সৃষ্টিকর্তার একত্ববাদের দাওয়াত দেয়</p>
+      <p class="en">This message invites to peace, humanity and the oneness of the Creator</p>
+      <p class="bn">এটা কোনো জাতি, ধর্ম বা সভ্যতার বিরুদ্ধে নয়</p>
+      <p class="en">This is not against any nation, religion or civilization</p>
+    </div>
+
+    <!--ব্যক্তিত্ববান যারা -->
+    <div class="share-list-box">
+      <div class="share-list-title">💚 ব্যক্তিত্ব</div>
+      <div class="share-list" id="shareList"></div>
+      <div class="share-count" id="shareCount">মোট: ০/ 1M</div>
+    </div>
+  </div>
+
+  <!-- নিচে ৩টা বাটন -->
+  <div class="bottom-actions">
+    <button class="action-btn" onclick="handleRegister()">আল্লাহ </button>
+    <button class="action-btn solid" onclick="handleVisit()">ঈমান </button>
+    <button class="action-btn solid" onclick="handleShare()">আমার</button>
+  </div>
+
+  <script>
+    const pageUrl = window.location.href;
+    const shareText = `সকল সভ্য জাতির জন্য বার্তা\nMessage for All Civilized Nations\n\n${pageUrl}`;
+    
+    // খাম খোলা
+    document.getElementById('envelope').addEventListener('click', function(){
+      this.classList.add('khula');
+      setTimeout(() => {
+        document.getElementById('mainBox').style.display = 'none';
+        document.getElementById('vitore').classList.add('show');
+      }, 800);
+    });
+    
+    // শেয়ার লিস্ট লোড
+    let shareList = JSON.parse(localStorage.getItem('shareList') || '[]');
+    updateShareList();
+
+    function handleRegister() {
+      alert('1 মহান : স্রষ্টার সাক্ষ্য দিন।\n\nহৃদয় এ | জবানে | জীবন এ\n\n আল্লাহ এক');
+    }
+
+    function handleVisit() {
+      alert('ধরুন : আপনার জীবনের সকল ভালো মন্দের হিসাব এবং বিচারক আপনি ।\n\nপরিদর্শন মোড চালু!');
+    }
+
+    function handleShare() {
+      if(shareList.length >= 50){
+        alert('ধন্যবাদ! 1M জনের লিস্ট পূর্ণ হয়ে গেছে ❤️');
+        return;
+      }
+      
+      const userName = prompt('আপনার নাম লিখুন:');
+      if(!userName || userName.trim() === '') return;
+      
+      // লিস্টে নাম যোগ করো
+      shareList.push({
+        name: userName.trim(),
+        time: new Date().toLocaleString('bn-BD')
+      });
+      
+      localStorage.setItem('shareList', JSON.stringify(shareList));
+      updateShareList();
+      
+      // বিতরণ
+      if (navigator.share) {
+        navigator.share({
+          title: 'সকল সভ্য জাতির জন্য বার্তা',
+          text: `${userName} এর পক্ষ থেকে:\n\n${shareText}`,
+          url: pageUrl
+        });
+      } else {
+        navigator.clipboard.writeText(pageUrl).then(() => {
+          alert(`${userName}, আপনার নাম লিস্টে যুক্ত হয়েছে ❤️\nলিংক কপি হয়েছে!`);
+        });
+      }
+    }
+    
+    function updateShareList(){
+      const listEl = document.getElementById('shareList');
+      const countEl = document.getElementById('shareCount');
+      
+      if(!listEl || !countEl) return;
+      
+      listEl.innerHTML = '';
+      shareList.forEach((item, index) => {
+        listEl.innerHTML += `<div class="share-item">${index+1}. ${item.name}</div>`;
+      });
+      
+      countEl.textContent = `মোট: ${shareList.length}/1M জন`;
+    }
+  </script>
+</body>
+</html>
